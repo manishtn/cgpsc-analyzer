@@ -1,0 +1,311 @@
+{
+  "version": "cgpsc-taxonomy-v1.0.0",
+  "description": "Editable taxonomy for CGPSC Prelims Analyzer v1. Keywords are classification evidence, not answer keys.",
+  "subjects": [
+    {
+      "id": "history",
+      "label": "History",
+      "keywords": [{"term": "ancient india", "weight": 2}, {"term": "viceroy", "weight": 2}, {"term": "dynasty", "weight": 2}],
+      "topics": [
+        {
+          "id": "history.ancient",
+          "label": "Ancient India",
+          "keywords": ["rigvedic", "vedic", "kanishka", "mahajanapada", "buddhism", "vijayanagar"],
+          "subtopics": [
+            {"id": "history.ancient.archaeology", "label": "Archaeology and Civilizations", "keywords": ["ploughed field", "mohenjodaro", "kalibangan", "lothal", "dholavira"]},
+            {"id": "history.ancient.religion_philosophy", "label": "Religion and Philosophy", "keywords": ["gods", "kumarilabhatta", "prabhakara", "heterodox", "pali", "vinay pitaka"]},
+            {"id": "history.ancient.kingdoms", "label": "Kingdoms and Personalities", "keywords": ["court", "ruler", "empire", "ayojjha", "sarayu"]}
+          ]
+        },
+        {
+          "id": "history.modern",
+          "label": "Modern India",
+          "keywords": ["vernacular press act", "lord ripon", "lord lytton", "brahmo samaj", "atmiya sabha"],
+          "subtopics": [
+            {"id": "history.modern.colonial", "label": "Colonial Administration and Movements", "keywords": ["gagging act", "amrit bazar patrika", "socio religious", "organisation", "movement"]},
+            {"id": "history.modern.reform", "label": "Reform Movements", "keywords": ["brahmo", "sadharan"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polity_governance",
+      "label": "Polity and Governance",
+      "keywords": [{"term": "constitution", "weight": 2}, {"term": "article", "weight": 1.5}, {"term": "act", "weight": 0.5}],
+      "topics": [
+        {
+          "id": "polity_governance.constitution",
+          "label": "Constitution",
+          "keywords": ["fundamental rights", "high court", "house", "judge"],
+          "subtopics": [
+            {"id": "polity_governance.constitution.rights", "label": "Rights and Constitutional Provisions", "keywords": ["right to property", "mother tongue", "article 300"]},
+            {"id": "polity_governance.constitution.institutions", "label": "Constitutional Institutions", "keywords": ["chief election commissioner", "selection committee", "leader of opposition"]}
+          ]
+        },
+        {
+          "id": "polity_governance.local_government",
+          "label": "Local Government",
+          "keywords": ["gram sabha", "gram panchayat", "nagar panchayat", "janpad panchayat", "panchayats"],
+          "subtopics": [
+            {"id": "polity_governance.local_government.panchayati_raj", "label": "Panchayati Raj", "keywords": ["sarpanch", "wards", "scheduled areas", "pesa", "village shall ordinarily"]},
+            {"id": "polity_governance.local_government.urban", "label": "Urban Local Government", "keywords": ["nagar"]}
+          ]
+        },
+        {
+          "id": "polity_governance.law_policy",
+          "label": "Law and Public Policy",
+          "keywords": ["labour code", "labour laws", "maternity leave"],
+          "subtopics": [
+            {"id": "polity_governance.law_policy.labour", "label": "Labour Policy", "keywords": ["minimum wage", "workers", "employers"]},
+            {"id": "polity_governance.law_policy.public_administration", "label": "Public Administration", "keywords": ["committee", "appointment", "terms of office"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "economy",
+      "label": "Economy",
+      "keywords": [{"term": "budget", "weight": 2}, {"term": "fiscal", "weight": 2}, {"term": "gross domestic product", "weight": 2}, "investment"],
+      "topics": [
+        {
+          "id": "economy.public_finance",
+          "label": "Public Finance",
+          "keywords": ["expenditure", "revenue deficit", "primary deficit", "frbm", "fiscal health"],
+          "subtopics": [
+            {"id": "economy.public_finance.budgeting", "label": "Budgeting and Deficits", "keywords": ["planned and non planned", "union budget", "deficit", "allocation"]},
+            {"id": "economy.public_finance.fiscal_policy", "label": "Fiscal Policy and Institutions", "keywords": ["n k singh", "fiscal responsibility", "index"]}
+          ]
+        },
+        {
+          "id": "economy.agriculture",
+          "label": "Agricultural Economy",
+          "keywords": ["farmers", "agriculture", "minimum support price", "crops", "irrigation"],
+          "subtopics": [
+            {"id": "economy.agriculture.support", "label": "Agricultural Support and Schemes", "keywords": ["doubling of farmers", "subsidy", "pmksy", "sprinkler", "drip systems"]},
+            {"id": "economy.agriculture.production", "label": "Crops and Production", "keywords": ["pulses", "cereals", "oilseeds", "kharif", "sown land"]}
+          ]
+        },
+        {
+          "id": "economy.development",
+          "label": "Development Economy",
+          "keywords": ["poverty index", "multidimensional poverty", "migration", "enterprise", "industrial development"],
+          "subtopics": [
+            {"id": "economy.development.indicators", "label": "Development Indicators", "keywords": ["niti aayog", "undp", "bank account", "maternal health"]},
+            {"id": "economy.development.industry", "label": "Industry and Enterprises", "keywords": ["small enterprises", "industrial policy", "thrust sector", "nutraceutical"]}
+          ]
+        },
+        {
+          "id": "economy.money_banking",
+          "label": "Money and Banking",
+          "keywords": ["rupee", "devalued", "currency"],
+          "subtopics": [
+            {"id": "economy.money_banking.currency", "label": "Currency and Exchange", "keywords": ["devaluation"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geography",
+      "label": "Geography",
+      "keywords": [{"term": "river", "weight": 1.5}, "plateau", "mountain range", "rainfall", "map"],
+      "topics": [
+        {
+          "id": "geography.physical",
+          "label": "Physical Geography",
+          "keywords": ["himalaya", "pleistocene", "rock formation", "peak", "waterfall"],
+          "subtopics": [
+            {"id": "geography.physical.landforms", "label": "Landforms and Geology", "keywords": ["shivalik", "karakoram", "pir panjal", "zanskar", "geology", "pleistocene", "rock formation"]},
+            {"id": "geography.physical.climate", "label": "Climate and Rainfall", "keywords": ["low rainfall", "mm of rainfall"]},
+            {"id": "geography.physical.rivers", "label": "Rivers and Drainage", "keywords": ["tributaries", "indus", "ganga", "brahmaputra", "meghna", "dam"]}
+          ]
+        },
+        {
+          "id": "geography.human",
+          "label": "Human and Economic Geography",
+          "keywords": ["rural urban", "internal migration", "highway", "cities"],
+          "subtopics": [
+            {"id": "geography.human.transport", "label": "Transport and Connectivity", "keywords": ["golden quadrilateral", "national highway", "tunnel"]},
+            {"id": "geography.human.population", "label": "Population and Migration", "keywords": ["periodic labour force survey"]},
+            {"id": "geography.human.cartography", "label": "Cartography", "keywords": ["flat sheet of paper", "model of the earth", "map"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "science_technology",
+      "label": "Science and Technology",
+      "keywords": ["force", "pressure", "artery", "elements", "metalloid", "disease"],
+      "topics": [
+        {
+          "id": "science_technology.physics",
+          "label": "Physics",
+          "keywords": ["electrostatic", "frictional", "gravitational", "magnetic", "bag straps"],
+          "subtopics": [
+            {"id": "science_technology.physics.mechanics", "label": "Mechanics and Pressure", "keywords": ["pressure exerted", "load"]},
+            {"id": "science_technology.physics.electricity", "label": "Electricity and Electrostatics", "keywords": ["fly ash", "factory chimney"]}
+          ]
+        },
+        {
+          "id": "science_technology.biology",
+          "label": "Biology and Health",
+          "keywords": ["blood", "heartbeat", "pulse", "bacteria", "fungus", "protozoa", "virus"],
+          "subtopics": [
+            {"id": "science_technology.biology.human", "label": "Human Biology", "keywords": ["artery"]},
+            {"id": "science_technology.biology.microbiology", "label": "Disease and Microbiology", "keywords": ["sorter disease", "sorter"]}
+          ]
+        },
+        {
+          "id": "science_technology.chemistry",
+          "label": "Chemistry",
+          "keywords": ["silver", "silicon", "sulphur", "sodium"],
+          "subtopics": [
+            {"id": "science_technology.chemistry.elements", "label": "Elements and Materials", "keywords": ["metalloid"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "environment",
+      "label": "Environment and Ecology",
+      "keywords": [{"term": "environment", "weight": 2}, "ecology", "forest", "clean energy", "solar energy"],
+      "topics": [
+        {
+          "id": "environment.ecology",
+          "label": "Ecology",
+          "keywords": ["food chain", "trophic levels", "bioenergetics"],
+          "subtopics": [
+            {"id": "environment.ecology.ecosystems", "label": "Ecosystems", "keywords": ["energy transfer", "biogeocoenosis"]}
+          ]
+        },
+        {
+          "id": "environment.conservation",
+          "label": "Conservation",
+          "keywords": ["project tiger", "project elephant", "project cheetah", "project lion", "national park", "tiger reserve"],
+          "subtopics": [
+            {"id": "environment.conservation.protected_areas", "label": "Protected Areas and Species", "keywords": ["sanctuary", "indravati"]},
+            {"id": "environment.conservation.forests", "label": "Forests", "keywords": ["dry sal forest", "laterite soil"]}
+          ]
+        },
+        {
+          "id": "environment.energy",
+          "label": "Energy and Sustainability",
+          "keywords": ["bioenergy", "hydro power", "solar power", "gigawatt", "pm kusum"],
+          "subtopics": [
+            {"id": "environment.energy.renewable", "label": "Renewable Energy", "keywords": ["solar energy", "installed capacity", "diesel free", "barren fallow land"]},
+            {"id": "environment.energy.pollution", "label": "Pollution Control", "keywords": ["air pollution", "dust", "soot"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "art_culture",
+      "label": "Art and Culture",
+      "keywords": ["classical language", "book", "author", "travelogue", "unesco", "music", "dance", "temple"],
+      "topics": [
+        {
+          "id": "art_culture.literature",
+          "label": "Literature and Languages",
+          "keywords": ["sanskrit", "pali", "prakrit", "arabic", "tilakmanjari", "rihla"],
+          "subtopics": [
+            {"id": "art_culture.literature.texts", "label": "Texts and Authors", "keywords": ["author", "writer", "written", "memory of the world", "kavya sangrah"]},
+            {"id": "art_culture.literature.language", "label": "Languages", "keywords": ["classical language"]}
+          ]
+        },
+        {
+          "id": "art_culture.performing_visual",
+          "label": "Performing and Visual Arts",
+          "keywords": ["kathak", "tabla", "sitar", "bharatnatyam", "art"],
+          "subtopics": [
+            {"id": "art_culture.performing_visual.performing", "label": "Performing Arts", "keywords": ["music", "dance"]},
+            {"id": "art_culture.performing_visual.architecture", "label": "Architecture and Heritage", "keywords": ["khajuraho", "chandel", "temple", "geographical indication", "gi tag"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "current_affairs",
+      "label": "Current Affairs",
+      "keywords": [{"term": "2025", "weight": 1}, {"term": "2024", "weight": 0.5}, "theme"],
+      "topics": [
+        {
+          "id": "current_affairs.events_awards",
+          "label": "Events, Awards and Reports",
+          "keywords": ["world environment day", "theme", "register", "report"],
+          "subtopics": [
+            {"id": "current_affairs.events_awards.events", "label": "Events and Themes", "keywords": ["mahotsav", "samaroh", "rajyotsava"]},
+            {"id": "current_affairs.events_awards.reports", "label": "Reports and Rankings", "keywords": ["index", "top three positions"]}
+          ]
+        },
+        {
+          "id": "current_affairs.sports",
+          "label": "Sports",
+          "keywords": ["hockey", "badminton", "cricket", "chess", "kho kho"],
+          "subtopics": [
+            {"id": "current_affairs.sports.people", "label": "Sports Personalities", "keywords": ["divya deshmukh", "smriti mandhana", "vandana katariya"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chhattisgarh_studies",
+      "label": "Chhattisgarh Studies",
+      "keywords": [{"term": "chhattisgarh", "weight": 4}, {"term": "raipur", "weight": 3}, {"term": "bastar", "weight": 3}, {"term": "surguja", "weight": 3}],
+      "topics": [
+        {
+          "id": "chhattisgarh_studies.history",
+          "label": "Chhattisgarh History",
+          "keywords": ["maratha rule", "ratanpur", "raipur conspiracy", "princely state", "panduvansha", "rebellion"],
+          "subtopics": [
+            {"id": "chhattisgarh_studies.history.ancient_medieval", "label": "Ancient and Medieval Chhattisgarh", "keywords": ["dakshin kosal", "sirpur", "harshagupta", "tivar dev", "bimbaji"]},
+            {"id": "chhattisgarh_studies.history.modern", "label": "Modern Chhattisgarh", "keywords": ["lochan prasad pandey", "v v giri", "begar pratha", "oraon rebellion", "rajnandgaon", "raipur conspiracy"]}
+          ]
+        },
+        {
+          "id": "chhattisgarh_studies.geography",
+          "label": "Chhattisgarh Geography",
+          "keywords": ["khuriya plateau", "pendra plateau", "kharun river", "dandakaranya", "minerals found"],
+          "subtopics": [
+            {"id": "chhattisgarh_studies.geography.physical", "label": "Physical Geography", "keywords": ["peak", "waterfall", "river", "rainfall", "plateau"]},
+            {"id": "chhattisgarh_studies.geography.resources", "label": "Resources and Agriculture", "keywords": ["garnet", "quartzite", "mica", "lead", "fireclay", "irrigation potential"]}
+          ]
+        },
+        {
+          "id": "chhattisgarh_studies.society_culture",
+          "label": "Chhattisgarh Society and Culture",
+          "keywords": ["tribe", "ghotul", "dish", "ornament", "festival", "deity", "idiom"],
+          "subtopics": [
+            {"id": "chhattisgarh_studies.society_culture.tribes", "label": "Tribes and Traditions", "keywords": ["oraon", "muriya", "bhunjiya", "binjhwar", "spirits", "sarhul", "houses"]},
+            {"id": "chhattisgarh_studies.society_culture.folk", "label": "Folk Culture and Language", "keywords": ["kaksar", "bihai", "kheer", "puzzle", "panhi", "titari", "jhumka"]}
+          ]
+        },
+        {
+          "id": "chhattisgarh_studies.governance_economy",
+          "label": "Chhattisgarh Governance and Economy",
+          "keywords": ["state budget", "chief minister", "yojana", "district level progress", "industrial development policy"],
+          "subtopics": [
+            {"id": "chhattisgarh_studies.governance_economy.schemes", "label": "State Schemes and Welfare", "keywords": ["amrit yojana", "sakhi one stop", "chak", "pm janman", "samagra grameen", "child marriage", "healthy woman"]},
+            {"id": "chhattisgarh_studies.governance_economy.development", "label": "State Economy and Development", "keywords": ["electricity utilization", "growth rate", "sdg", "budget allocation"]}
+          ]
+        }
+      ]
+    }
+  ],
+  "difficulty": {
+    "base_score": 2.2,
+    "question_type_weights": {
+      "standard_mcq": 0.0,
+      "statement_based": 1.6,
+      "ordering": 1.8,
+      "match_following": 1.6,
+      "assertion_reason": 2.0
+    },
+    "signals": [
+      {"id": "multi_statement", "keywords": ["consider the following statements", "which of the following statements", "which facts are correct"], "weight": 0.8},
+      {"id": "negative_wording", "keywords": ["not correct", "not included", "did not", "not accepted", "not devalued"], "weight": 0.7},
+      {"id": "ordering_reasoning", "keywords": ["arrange", "chronological order", "descending order"], "weight": 0.9},
+      {"id": "precision_recall", "keywords": ["percentage", "article", "year", "installed capacity", "allocation", "how many", "correct number"], "weight": 0.5},
+      {"id": "current_specific", "keywords": ["2025", "2024", "current", "revised"], "weight": 0.3}
+    ],
+    "thresholds": {"medium": 3.4, "hard": 5.2}
+  }
+}
