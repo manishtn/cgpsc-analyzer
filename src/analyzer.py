@@ -1,7 +1,10 @@
-"""Taxonomy-driven CGPSC Analyzer v1.
+"""
+Taxonomy-driven CGPSC Analyzer v1.
 
 Enriches Reader question JSON with a stable classification path, alternatives,
 difficulty, and aggregation keys suitable for multi-year analysis.
+
+Year-agnostic: accepts year as parameter instead of hardcoding.
 """
 
 from __future__ import annotations
@@ -10,27 +13,27 @@ import argparse
 import json
 import math
 import re
+import logging
 from collections import Counter
 from pathlib import Path
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = PROJECT_ROOT / "data" / "json" / "questions_draft.json"
-DEFAULT_TAXONOMY = PROJECT_ROOT / "data" / "taxonomy" / "cgpsc_taxonomy_v1.json"
-DEFAULT_OUTPUT = PROJECT_ROOT / "data" / "analyzed" / "cgpsc_2025_analyzed.json"
+logger = logging.getLogger(__name__)
 
 
 def normalize(text: str) -> str:
+    """Normalize text for keyword matching."""
     text = text.lower()
     text = re.sub(r"[^a-z0-9%.\-]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
 def option_text(question: dict) -> str:
+    """Extract normalized text from question options."""
     return normalize(" ".join(str(value) for value in question.get("options", {}).values()))
 
 
 def keyword_score(text: str, keywords: list) -> tuple[float, list[str]]:
+    """Score text against keyword list."""
     score = 0.0
     evidence = []
     for item in keywords:
@@ -46,6 +49,7 @@ def keyword_score(text: str, keywords: list) -> tuple[float, list[str]]:
 
 
 def flatten_taxonomy(taxonomy: dict) -> list[dict]:
+    """Flatten taxonomy into leaf nodes with cumulative keywords."""
     def scaled(keywords: list, multiplier: float, level: str) -> list[dict]:
         result = []
         for item in keywords:
@@ -84,6 +88,7 @@ def flatten_taxonomy(taxonomy: dict) -> list[dict]:
 
 
 def confidence_from_scores(best: float, second: float) -> float:
+    """Compute confidence from scores."""
     if best <= 0:
         return 0.0
     margin = best - second
@@ -91,6 +96,7 @@ def confidence_from_scores(best: float, second: float) -> float:
 
 
 def classify_taxonomy(text: str, leaves: list[dict], secondary_text: str = "") -> dict:
+    """Classify question against taxonomy."""
     ranked = []
     for leaf in leaves:
         score, evidence = keyword_score(text, leaf["keywords"])
@@ -138,6 +144,7 @@ def classify_taxonomy(text: str, leaves: list[dict], secondary_text: str = "") -
 
 
 def classify_difficulty(question: dict, config: dict) -> dict:
+    """Classify question difficulty."""
     text = normalize(question.get("question", ""))
     score = float(config["base_score"])
     evidence = []
@@ -177,6 +184,7 @@ def classify_difficulty(question: dict, config: dict) -> dict:
 
 
 def enrich_question(question: dict, taxonomy: dict, leaves: list[dict], exam: str, year: int) -> dict:
+    """Enrich a single question with classification and difficulty."""
     classification = classify_taxonomy(normalize(question.get("question", "")), leaves, option_text(question))
     primary = classification["primary"]
     result = dict(question)
@@ -198,6 +206,7 @@ def enrich_question(question: dict, taxonomy: dict, leaves: list[dict], exam: st
 
 
 def build_summary(questions: list[dict]) -> dict:
+    """Build summary statistics from analyzed questions."""
     def counts(path):
         return dict(sorted(Counter(path(question) for question in questions).items()))
 
@@ -213,7 +222,8 @@ def build_summary(questions: list[dict]) -> dict:
     }
 
 
-def analyze(document: dict, taxonomy: dict) -> dict:
+def analyze_document(document: dict, taxonomy: dict) -> dict:
+    """Analyze entire document with taxonomy."""
     leaves = flatten_taxonomy(taxonomy)
     questions = [
         enrich_question(question, taxonomy, leaves, document.get("exam", "CGPSC Prelims"), document["year"])
@@ -230,20 +240,70 @@ def analyze(document: dict, taxonomy: dict) -> dict:
     }
 
 
+def run_analyzer(
+    input_file: str,
+    output_file: str,
+    taxonomy_file: str
+) -> tuple[bool, str]:
+    """
+    Analyze parser output with taxonomy.
+    
+    Args:
+        input_file: Path to parser output JSON
+        output_file: Path to analyzer output JSON
+        taxonomy_file: Path to taxonomy JSON
+        
+    Returns:
+        Tuple of (success: bool, message: str)
+    """
+    input_path = Path(input_file)
+    output_path = Path(output_file)
+    taxonomy_path = Path(taxonomy_file)
+    
+    if not input_path.exists():
+        return False, f"Input file not found: {input_path}"
+    if not taxonomy_path.exists():
+        return False, f"Taxonomy not found: {taxonomy_path}"
+    
+    try:
+        logger.info(f"Analyzing questions: {input_path}")
+        
+        with open(input_path, 'r', encoding='utf-8') as f:
+            document = json.load(f)
+        with open(taxonomy_path, 'r', encoding='utf-8') as f:
+            taxonomy = json.load(f)
+        
+        result = analyze_document(document, taxonomy)
+        
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+        
+        logger.info(f"Analysis complete: {output_path}")
+        return True, f"Analyzed {result['summary']['questions']} questions with taxonomy"
+        
+    except json.JSONDecodeError as e:
+        msg = f"Failed to parse JSON: {str(e)}"
+        logger.error(msg)
+        return False, msg
+    except Exception as e:
+        msg = f"Analysis failed: {str(e)}"
+        logger.error(msg)
+        return False, msg
+
+
 def main() -> None:
+    """Command-line interface."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("input", nargs="?", type=Path, default=DEFAULT_INPUT)
-    parser.add_argument("-t", "--taxonomy", type=Path, default=DEFAULT_TAXONOMY)
-    parser.add_argument("-o", "--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("input", type=Path, help="Path to parser output JSON")
+    parser.add_argument("-t", "--taxonomy", type=Path, required=True, help="Path to taxonomy JSON")
+    parser.add_argument("-o", "--output", type=Path, required=True, help="Output JSON file path")
     args = parser.parse_args()
 
-    document = json.loads(args.input.read_text(encoding="utf-8"))
-    taxonomy = json.loads(args.taxonomy.read_text(encoding="utf-8"))
-    result = analyze(document, taxonomy)
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps(result["summary"], indent=2))
-    print(f"Wrote {args.output}")
+    success, message = run_analyzer(str(args.input), str(args.output), str(args.taxonomy))
+    print(message)
+    import sys
+    sys.exit(0 if success else 1)
 
 
 if __name__ == "__main__":
